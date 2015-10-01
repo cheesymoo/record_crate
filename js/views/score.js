@@ -2,8 +2,24 @@ App.Views.scoreView = Backbone.View.extend({
 
     initialize: function(options) {},
 
+    events: {
+        'click #reset' : 'reset'
+    },
+
     render: function() {
-        this.$el.html("<h1>You are in last place, loser!</h1>");
+        var template = '<h1> Current Tally </h1>' +
+            '<table><tr><td># You chose wisely</td><td># You chose poorly</td></tr>' +
+            '<tr><td>' + this.model.game.get('wins') + '</td><td>' +
+            this.model.game.get('loss') + '</td></tr></table>' +
+            '<input type="button" id="reset" value="Reset score?"/>' +
+            '<a href="#game">Back to game?</a>';
+        this.$el.html(template);
         return this;
+    },
+
+    reset: function() {
+        this.model.game.reset();
+        this.render();
     }
+
 });

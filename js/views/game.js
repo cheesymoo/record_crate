@@ -5,7 +5,8 @@ App.Views.gameView = Backbone.View.extend({
     },
 
     events: {
-        'click #boom' : 'getAlbum'
+        'click #boom' : 'getAlbum',
+        'click #guess': 'check'
     },
 
     render: function() {
@@ -16,6 +17,7 @@ App.Views.gameView = Backbone.View.extend({
     getAlbum: function() {
         var rand = Math.floor(Math.random() * (ALBUM_HASH.length - 1));
         this.model.buttons.makeButtons(rand);
+        this.model.game.set('answer', rand);
         this.model.album.save(ALBUM_HASH[rand], {
             error: this.renderError,
             success: this.renderGuess.bind(this)
@@ -33,10 +35,28 @@ App.Views.gameView = Backbone.View.extend({
         var buttonsTemplate = '<ul>';
         var buttons = this.model.buttons.get('buttons');
         for (var i = 0; i < 4; i++) {
-            buttonsTemplate += '<li><input type="button" id="button' + 
-                i + '"value="' + buttons[i] + '"/></li>';
+            buttonsTemplate += '<li><input type="button" id="guess" value="' + 
+                buttons[i] + '"/></li>';
         }
         this.$el.html(buttonsTemplate + '</ul>');
+    },
+
+    check: function(e) {
+        var guess = e.target.value;
+        var string;
+        if (guess == ALBUM_HASH[this.model.game.get('answer')].album)
+        {
+            this.model.game.right();
+            string = 'Correct!'
+        }
+        else
+        {
+            this.model.game.wrong();
+            string = 'Wrong!';
+        }
+        var temp = '<h1>' + string + '</h1>' +
+            '<input type="button" id="boom" value="Go Again?">';
+        this.$el.html(temp);
     },
 
     renderError: function(e) {
