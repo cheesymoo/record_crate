@@ -1,0 +1,13 @@
+{
+  "name": "record_crate",
+  "main": "index.html",
+  "description": "Dig through some records with Gracenote API",
+  "window": {
+    "toolbar": true,
+    "width": 500,
+    "height": 500
+  },
+  "dependencies": {
+    "http-proxy": "^1.11.2"
+  }
+}
