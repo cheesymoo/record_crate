@@ -7,17 +7,17 @@ App.Router = Backbone.Router.extend({
     },
 
     menu: function(){
-        var view = new App.Views.menu();
+        var view = new App.Views.menuView();
         $('#main').html(view.render().el);
     },
 
     score: function(){
-        var view = new App.Views.score();
+        var view = new App.Views.scoreView();
         $('#main').html(view.render().el);
     },
 
     game: function(){
-        var view = new App.Views.game();
+        var view = new App.Views.gameView();
         $('#main').html(view.render().el);
     }
 

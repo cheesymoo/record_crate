@@ -5,19 +5,17 @@ App.Models.Album = Backbone.Model.extend({
         cover: ''
     },
 
-    urlRoot: '',
-
     sync: function(method, model, options) {
-        var data;
         api.searchAlbum(this.get('artist'), this.get('album'), 
                 function(err, result) {
-                    console.log('Res: ', result);
-                    if(err) {
-                        console.log('Err: ', err);
-                    } 
-                    data = result;
-                },
+                    if (err !== undefined && err !== null) {
+                        console.log('boot', err);
+                        options.error(err);
+                    } else {
+                        this.set({'cover' : result[0].album_art_url});
+                        options.success();
+                    }
+                }.bind(this),
                 {matchMode: Gracenote.BEST_MATCH_ONLY});
-        console.log('Data: ', data);
     }
 });

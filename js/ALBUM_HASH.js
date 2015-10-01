@@ -40,8 +40,8 @@ var ALBUM_HASH = [
         album: 'Photographs'
     },
     {
-        artist: "Sarah Ruth",
-        album: "Words on the Wind"
+        artist: "UGK",
+        album: "Too Hard to Swallow"
     },
     {
         artist: 'Sam Cooke',

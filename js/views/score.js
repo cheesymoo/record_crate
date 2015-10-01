@@ -1,4 +1,4 @@
-App.Views.score = Backbone.View.extend({
+App.Views.scoreView = Backbone.View.extend({
 
     initialize: function(options) {},
 
