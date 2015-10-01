@@ -5,27 +5,19 @@ App.Models.Album = Backbone.Model.extend({
         cover: ''
     },
 
-    //urlRoot: 'https://c1373283025.web.cddbp.net/webapi/json/1.0/',
-    urlRoot: 'localhost:8000/curl_proxy.php?ws_path=https://c1373283025.web.cddbp.net/webapi/json/1.0/',
-    //urlRoot:'http://cors.io/?u=https://c1373283025.web.cddbp.net/webapi/json/1.0/', 
+    urlRoot: '',
 
     sync: function(method, model, options) {
-        //  
-        $.ajax({
-            type: 'POST',
-            url: this.urlRoot,
-            data: this.generatePayload()
-        });
-    },
-
-    generatePayload: function()
-    {
-        return '<QUERIES><LANG>eng</LANG><AUTH><CLIENT>' +
-            CLIENT_ID + '</CLIENT><USER>' + USER_ID + 
-            '</USER></AUTH><QUERY CMD="ALBUM_SEARCH"><MODE>SINGLE_BEST_COVER</MODE>' +
-            '<TEXT TYPE="ARTIST">' + this.get('artist') + '</TEXT>' +
-            '<TEXT TYPE="ALBUM_TITLE">' + this.get('album') + 
-            '</TEXT><OPTION><PARAMETER>SELECT_EXTENDED</PARAMETER>' + 
-            '<VALUE>COVER</VALUE></OPTION></QUERY>';
+        var data;
+        api.searchAlbum(this.get('artist'), this.get('album'), 
+                function(err, result) {
+                    console.log('Res: ', result);
+                    if(err) {
+                        console.log('Err: ', err);
+                    } 
+                    data = result;
+                },
+                {matchMode: Gracenote.BEST_MATCH_ONLY});
+        console.log('Data: ', data);
     }
 });
