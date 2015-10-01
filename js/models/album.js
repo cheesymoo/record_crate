@@ -1,4 +1,4 @@
-App.Models.Album = Backbone.Model.extend({
+App.Models.album = Backbone.Model.extend({
     defaults: {
         album: "The Wall",
         artist: "Pink Floyd",

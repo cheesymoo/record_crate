@@ -6,18 +6,30 @@ App.Router = Backbone.Router.extend({
         '*path': 'menu'
     },
 
+    initialize: function() {
+        this.model = {};
+        this.model.game = new App.Models.game();
+        this.model.album = new App.Models.album();
+    },
+
     menu: function(){
-        var view = new App.Views.menuView();
+        var view = new App.Views.menuView({
+            model : this.model
+        });
         $('#main').html(view.render().el);
     },
 
     score: function(){
-        var view = new App.Views.scoreView();
+        var view = new App.Views.scoreView({
+            model : this.model
+        });
         $('#main').html(view.render().el);
     },
 
     game: function(){
-        var view = new App.Views.gameView();
+        var view = new App.Views.gameView({
+            model : this.model
+        });
         $('#main').html(view.render().el);
     }
 

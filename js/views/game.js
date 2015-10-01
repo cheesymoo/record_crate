@@ -1,12 +1,7 @@
 App.Views.gameView = Backbone.View.extend({
-
-    template: '<h2> Which album is this? </h2>' +
-        '<input type="button" id="boom"/>',
-
-    initialize: function(options) {
-        this.model = {};
-        this.children = {};
-        this.model.game = new App.Models.game();
+    initialize: function() {
+        Backbone.View.prototype.initialize.apply(this, arguments);
+        this.model.buttons = new App.Models.buttons({});
     },
 
     events: {
@@ -20,27 +15,34 @@ App.Views.gameView = Backbone.View.extend({
 
     getAlbum: function() {
         var rand = Math.floor(Math.random() * (ALBUM_HASH.length - 1));
-        this.model.album = new App.Models.Album(ALBUM_HASH[rand]);
+        this.model.buttons.makeButtons(rand);
         this.model.album.save(ALBUM_HASH[rand], {
             error: this.renderError,
-            success: this.renderGuess
+            success: this.renderGuess.bind(this)
         });
     },
 
     renderGuess: function(e) {
-        console.log("render the guess!");
-        /*
-        this.children.guessView = new App.Views.guess({
-            model: {
-                game: this.model.game,
-                album: this.model.album
-            }
-        });
-        $('#main').html(this.children.guessView.render().el);
-        */
+        var playTemplate = '<h2> Which album is this? </h2>' +
+            '<img src="' + this.model.album.get('cover') + '"/>';
+        this.$el.html(playTemplate);
+        setTimeout(this.showButtons.bind(this), 1200);
+    },
+
+    showButtons: function() {
+        var buttonsTemplate = '<ul>';
+        var buttons = this.model.buttons.get('buttons');
+        for (var i = 0; i < 4; i++) {
+            buttonsTemplate += '<li><input type="button" id="button' + 
+                i + '"value="' + buttons[i] + '"/></li>';
+        }
+        this.$el.html(buttonsTemplate + '</ul>');
     },
 
     renderError: function(e) {
-        console.log("render the eerrrror!", e);
-    }
+        console.log("error: ", e);
+    },
+
+    template: '<h2> Ready? </h2>' +
+        '<input type="button" id="boom"/>'
 });
