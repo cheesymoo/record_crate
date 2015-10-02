@@ -64,5 +64,5 @@ App.Views.gameView = Backbone.View.extend({
     },
 
     template: '<h2> Ready? </h2>' +
-        '<input type="button" id="boom"/>'
+        '<input type="button" id="boom" value="Go!"/>'
 });
