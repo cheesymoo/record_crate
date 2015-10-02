@@ -40,10 +40,6 @@ var ALBUM_HASH = [
         album: 'Photographs'
     },
     {
-        artist: "UGK",
-        album: "Too Hard to Swallow"
-    },
-    {
         artist: 'Sam Cooke',
         album: 'A Change is Gonna Come'
     },
@@ -66,5 +62,13 @@ var ALBUM_HASH = [
     {
         artist: 'King Crimson',
         album: 'The Court of the Crimson King'
+    },
+    {
+        artist: 'My Bloody Valentine',
+        album: 'Loveless'
+    },
+    {
+        artist: 'The Smiths',
+        album: 'Hatful of Hollow'
     }
 ];

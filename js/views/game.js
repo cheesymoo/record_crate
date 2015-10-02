@@ -61,6 +61,9 @@ App.Views.gameView = Backbone.View.extend({
 
     renderError: function(e) {
         console.log("error: ", e);
+        var temp = '<h1> Whoops! Something went wrong... </h1>' +
+        '<input type="button" id="boom" value="Go Again?">';
+        this.$el.html(temp);
     },
 
     template: '<h2> Ready? </h2>' +

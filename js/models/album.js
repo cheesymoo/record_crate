@@ -11,6 +11,8 @@ App.Models.album = Backbone.Model.extend({
                     if (err !== undefined && err !== null) {
                         console.log('boot', err);
                         options.error(err);
+                    } else if ( result[0].album_art_url == '' ) {
+                        options.error('no album art');
                     } else {
                         this.set({'cover' : result[0].album_art_url});
                         options.success();
