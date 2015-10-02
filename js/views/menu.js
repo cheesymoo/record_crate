@@ -1,7 +1,7 @@
 App.Views.menuView = Backbone.View.extend({
 
-    template : '<h1> Can you guess the album? </h1>' +
-        '<a href="#game">Start!</a>',
+    template : '<h1> Welcome to a big pile of records. </h1>' +
+        '<a id="boom" href="#game">Start!</a>',
 
     initialize: function(options) {},
 
